@@ -1,0 +1,48 @@
+{
+  "workspace": {
+    "path": "/home/tinyclaw/tinyclaw-workspace",
+    "name": "tinyclaw-workspace"
+  },
+  "channels": {
+    "enabled": [
+      "telegram"
+    ],
+    "telegram": {
+      "bot_token": "YOUR_TELEGRAM_BOT_TOKEN"
+    }
+  },
+  "agents": {
+    "spot": {
+      "name": "Spot",
+      "provider": "anthropic",
+      "model": "opus",
+      "working_directory": "/home/tinyclaw/tinyclaw-workspace/spot"
+    },
+    "coder": {
+      "name": "spot-coder",
+      "provider": "anthropic",
+      "model": "opus",
+      "working_directory": "/home/tinyclaw/tinyclaw-workspace/coder"
+    },
+    "researcher": {
+      "name": "spot-researcher",
+      "provider": "anthropic",
+      "model": "sonnet",
+      "working_directory": "/home/tinyclaw/tinyclaw-workspace/researcher"
+    }
+  },
+  "models": {
+    "provider": "anthropic",
+    "anthropic": {
+      "model": "opus"
+    }
+  },
+  "monitoring": {
+    "heartbeat_interval": 1800
+  },
+  "pairing": {
+    "telegram": {
+      "default_agent": "spot"
+    }
+  }
+}
