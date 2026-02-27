@@ -130,7 +130,7 @@ export default function OfficePage() {
         id,
         agent,
         deskPos: DESK_POSITIONS[i % DESK_POSITIONS.length],
-        sprite: `/assets/office/${SPRITE_KEYS[i % SPRITE_KEYS.length]}.png`,
+        sprite: `/spot/office/assets/office/${SPRITE_KEYS[i % SPRITE_KEYS.length]}.png`,
       })),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [agentEntries.map(([id]) => id).join(",")]
@@ -328,7 +328,7 @@ export default function OfficePage() {
           <div
             className="absolute inset-0"
             style={{
-              backgroundImage: "url(/assets/office/floor_tile.png)",
+              backgroundImage: "url(/spot/office/assets/office/floor_tile.png)",
               backgroundSize: "40px 40px",
               backgroundRepeat: "repeat",
               imageRendering: "pixelated",
@@ -347,14 +347,14 @@ export default function OfficePage() {
               }}
             >
               <img
-                src="/assets/office/desk.png"
+                src="/spot/office/assets/office/desk.png"
                 alt=""
                 className="w-[72px] h-[40px]"
                 style={{ imageRendering: "pixelated" }}
                 draggable={false}
               />
               <img
-                src="/assets/office/monitor.png"
+                src="/spot/office/assets/office/monitor.png"
                 alt=""
                 className="absolute w-[28px] h-auto"
                 style={{
@@ -366,7 +366,7 @@ export default function OfficePage() {
                 draggable={false}
               />
               <img
-                src="/assets/office/chair.png"
+                src="/spot/office/assets/office/chair.png"
                 alt=""
                 className="absolute w-[24px] h-auto"
                 style={{
@@ -390,7 +390,7 @@ export default function OfficePage() {
           ].map((pos, i) => (
             <img
               key={`plant-${i}`}
-              src="/assets/office/plant.png"
+              src="/spot/office/assets/office/plant.png"
               alt=""
               className="absolute w-[36px] h-auto"
               style={{
@@ -464,7 +464,7 @@ export default function OfficePage() {
                       <div className="absolute -bottom-1 left-4 w-2 h-2 bg-primary rotate-45" />
                     </div>
                     <img
-                      src="/assets/office/char_player.png"
+                      src="/spot/office/assets/office/char_player.png"
                       alt="User"
                       className="w-[36px] h-auto mx-auto"
                       style={{ imageRendering: "pixelated" }}
