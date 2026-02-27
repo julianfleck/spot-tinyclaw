@@ -1,0 +1,22 @@
+{
+  "name": "Retrieval Architectures",
+  "enabled": true,
+  "keywords": [
+    "GraphRAG",
+    "temporal knowledge graph retrieval",
+    "multi-hop retrieval LLM",
+    "hypergraph reasoning",
+    "agentic RAG",
+    "recursive retrieval",
+    "graph-augmented generation",
+    "knowledge graph QA",
+    "LinearRAG",
+    "MemoTime",
+    "TeaRAG",
+    "entity-focused retrieval"
+  ],
+  "searchProviders": ["brave", "arxiv", "browser"],
+  "cadence": "weekly:friday",
+  "deliverEmpty": false,
+  "lastRun": "2026-02-20"
+}

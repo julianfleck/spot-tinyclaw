@@ -1,0 +1,16 @@
+{
+  "name": "Brand & Name Mentions",
+  "enabled": true,
+  "keywords": [
+    "Julian Fleck",
+    "julianfleck.net",
+    "recurse.cc",
+    "epistemic infrastructure",
+    "divergence engines"
+  ],
+  "searchProviders": ["serpapi", "brave", "browser"],
+  "cadence": "daily",
+  "deliverEmpty": false,
+  "lastRun": "2026-02-27",
+  "notes": "SerpAPI primary for real Google results, Brave as fallback"
+}

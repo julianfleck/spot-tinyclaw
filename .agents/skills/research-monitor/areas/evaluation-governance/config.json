@@ -1,0 +1,26 @@
+{
+  "name": "Evaluation & Governance",
+  "enabled": true,
+  "keywords": [
+    "memory benchmark LLM",
+    "hallucination evaluation agents",
+    "agent security vulnerabilities",
+    "cognitive bias AI systems",
+    "long-horizon evaluation",
+    "MemoryBench",
+    "HaluMem",
+    "MEMTRACK benchmark",
+    "BEAM benchmark",
+    "interaction dynamics reward",
+    "Moloch AI alignment",
+    "autonomous agent security"
+  ],
+  "searchProviders": [
+    "brave",
+    "arxiv",
+    "browser"
+  ],
+  "cadence": "weekly:friday",
+  "deliverEmpty": false,
+  "lastRun": "2026-02-27"
+}

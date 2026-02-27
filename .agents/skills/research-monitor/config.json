@@ -1,0 +1,12 @@
+{
+  "defaults": {
+    "runWindow": {
+      "start": "04:00",
+      "end": "06:00"
+    },
+    "timezone": "Europe/Berlin",
+    "deliverTo": "telegram",
+    "model": "anthropic/claude-sonnet-4",
+    "deliverEmpty": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Memory Architectures",
+  "enabled": true,
+  "keywords": [
+    "memory consolidation LLM",
+    "schema-based memory agents",
+    "episodic memory transformers",
+    "procedural memory agents",
+    "tiered memory LLM",
+    "constructivist memory AI",
+    "latent memory generation",
+    "working memory transformers",
+    "LightMem",
+    "MemGen",
+    "CAM constructivist",
+    "LEGOMem"
+  ],
+  "searchProviders": ["brave", "arxiv", "browser"],
+  "cadence": "weekly:friday",
+  "deliverEmpty": false,
+  "lastRun": "2026-02-27"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Divergence Engines",
+  "enabled": true,
+  "keywords": [
+    "reasoning path divergence",
+    "diverse chain of thought",
+    "exploratory AI generation",
+    "serendipity systems AI",
+    "anti-convergent generation",
+    "diversity LLM outputs",
+    "creative divergence AI",
+    "pass@k optimization",
+    "multi-path reasoning",
+    "cognitive exploration AI"
+  ],
+  "searchProviders": ["brave", "serpapi", "browser"],
+  "cadence": "biweekly:monday",
+  "deliverEmpty": false,
+  "lastRun": "2026-02-23"
+}

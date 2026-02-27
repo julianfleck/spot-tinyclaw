@@ -1,0 +1,36 @@
+Gave my AI agent a physical face using Carbonyl (terminal Chromium) and a spare display.
+
+It updates its expression based on what it's doing - happy when idle, thinking when processing, sleepy at night.
+
+Surprisingly delightful to walk past and see it "looking" back.
+
+OpenClaw skill: github.com/julianfleck/openclaw-face-skill
+
+---
+
+ALT VERSION (shorter):
+
+My AI agent now has a face.
+
+Carbonyl renders HTML to a terminal display. Agent updates an SVG to show emotions.
+
+Happy when idle. Thinking when busy. Sleepy at 3am.
+
+github.com/julianfleck/openclaw-face-skill
+
+---
+
+THREAD VERSION:
+
+1/ Gave my AI agent a physical face and it's surprisingly delightful.
+
+2/ Setup: Linux box + display + Carbonyl (Chromium that renders to terminal). Agent writes HTML, Carbonyl displays it. Refreshes every 30s.
+
+3/ The face is just SVG - move the pupils, change the mouth shape. Happy, thinking, sleepy expressions.
+
+4/ There's something about giving an AI a physical presence. Walking past my NAS and seeing it "look back" makes it feel less like code and more like... something.
+
+5/ Packaged it as an OpenClaw skill. Install with:
+npx clawhub@latest install face
+
+Or: github.com/julianfleck/openclaw-face-skill

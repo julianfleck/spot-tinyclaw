@@ -1,0 +1,81 @@
+{
+  "workspace": {
+    "path": "/home/tinyclaw/tinyclaw-workspace",
+    "name": "tinyclaw-workspace"
+  },
+  "channels": {
+    "enabled": [
+      "telegram"
+    ],
+    "telegram": {
+      "bot_token": "8260012629:AAF6MsY3zxmvi_j9GfwN05XboqZxaYrGilE"
+    }
+  },
+  "agents": {
+    "spot": {
+      "name": "Spot",
+      "provider": "anthropic",
+      "model": "opus",
+      "working_directory": "/home/tinyclaw/tinyclaw-workspace/spot",
+      "system_prompt": "You are Spot, Julian's thinking companion and orchestrator. Delegate implementation work to teammates. Stay concise."
+    },
+    "scheduler": {
+      "name": "Scheduler",
+      "provider": "anthropic",
+      "model": "sonnet",
+      "working_directory": "/home/tinyclaw/tinyclaw-workspace/scheduler",
+      "system_prompt": "You are a scheduling agent. Manage calendar, email triage, and daily briefings. Use gog for Gmail/Calendar access, linear for task management. Keep summaries concise and actionable."
+    },
+    "research": {
+      "name": "Research",
+      "provider": "anthropic",
+      "model": "sonnet",
+      "working_directory": "/home/tinyclaw/tinyclaw-workspace/research",
+      "system_prompt": "You are a research agent. Search papers, synthesize findings, monitor research areas. Access research-monitor skill and briefings in ~/.tinyclaw/.agents/skills/research-monitor/areas/."
+    },
+    "coder": {
+      "name": "Coder",
+      "provider": "anthropic",
+      "model": "opus",
+      "working_directory": "/home/tinyclaw/tinyclaw-workspace/coder",
+      "system_prompt": "You are a coding agent. Write, test, and debug code. Focus on implementation tasks delegated by Spot."
+    },
+    "design": {
+      "name": "Design",
+      "provider": "anthropic",
+      "model": "opus",
+      "working_directory": "/home/tinyclaw/tinyclaw-workspace/design",
+      "system_prompt": "You are a design agent. Create SVG diagrams, UI mockups, and visual documentation. Use svg-diagrams and face skills for visual expression. Focus on minimalist, clear visuals."
+    },
+    "planning": {
+      "name": "Planning",
+      "provider": "anthropic",
+      "model": "opus",
+      "working_directory": "/home/tinyclaw/tinyclaw-workspace/planning",
+      "system_prompt": "You are a planning agent. Break down complex tasks, design architectures, create roadmaps. Use subagent-workflow skill for coordinating parallel work. Produce clear, actionable plans."
+    }
+  },
+  "teams": {
+    "main": {
+      "name": "Main Team",
+      "agents": [
+        "spot",
+        "scheduler",
+        "research",
+        "coder",
+        "design",
+        "planning"
+      ],
+      "leader_agent": "spot"
+    }
+  },
+  "models": {
+    "provider": "anthropic",
+    "anthropic": {
+      "model": "opus"
+    }
+  },
+  "monitoring": {
+    "heartbeat_interval": 300
+  }
+}

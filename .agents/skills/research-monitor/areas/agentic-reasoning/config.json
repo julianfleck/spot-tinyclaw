@@ -1,0 +1,22 @@
+{
+  "name": "Agentic Reasoning & Self-Evolution",
+  "enabled": true,
+  "keywords": [
+    "self-evolving agents",
+    "recursive planning LLM",
+    "context engineering agents",
+    "memory-as-action RL",
+    "reflective agents",
+    "agentic self-learning",
+    "recursive context-aware planning",
+    "streaming chain of thought",
+    "SAGE self-evolving",
+    "ReCAP recursive planning",
+    "ACE context engineering",
+    "Sculptor active context"
+  ],
+  "searchProviders": ["brave", "arxiv", "browser"],
+  "cadence": "weekly:friday",
+  "deliverEmpty": false,
+  "lastRun": "2026-02-27"
+}

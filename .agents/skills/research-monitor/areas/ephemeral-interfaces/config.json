@@ -1,0 +1,20 @@
+{
+  "name": "Ephemeral Interfaces",
+  "enabled": true,
+  "keywords": [
+    "adaptive interface AI",
+    "contextual UI generation",
+    "malleable software",
+    "fluid interaction design",
+    "generative UI",
+    "ambient computing interfaces",
+    "post-application paradigm",
+    "dynamic interface assembly",
+    "AI-generated interfaces",
+    "substrate-based UI"
+  ],
+  "searchProviders": ["brave", "serpapi", "browser"],
+  "cadence": "biweekly:monday",
+  "deliverEmpty": false,
+  "lastRun": "2026-02-16"
+}
