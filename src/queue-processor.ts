@@ -422,6 +422,9 @@ log('INFO', 'Queue processor started (SQLite-backed)');
 logAgentConfig();
 emitEvent('processor_start', { agents: Object.keys(getAgents(getSettings())), teams: Object.keys(getTeams(getSettings())) });
 
+// Process any pending messages from previous session
+setImmediate(() => processQueue());
+
 // Event-driven: all messages come through the API server (same process)
 queueEvents.on('message:enqueued', () => {
     updateIncomingPreview(); // Update preview file for Claude hooks
