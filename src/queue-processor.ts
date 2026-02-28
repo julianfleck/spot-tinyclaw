@@ -29,6 +29,7 @@ import {
     initQueueDb, claimNextMessage, completeMessage as dbCompleteMessage,
     failMessage, enqueueResponse, getPendingAgents, recoverStaleMessages,
     pruneAckedResponses, pruneCompletedMessages, closeQueueDb, queueEvents, DbMessage,
+    getPendingMessagesPreview, getPendingMessageCount,
 } from './lib/db';
 import { handleLongResponse, collectFiles } from './lib/response';
 import {
@@ -322,6 +323,66 @@ async function processQueue(): Promise<void> {
     }
 }
 
+// ─── Incoming Message Preview ────────────────────────────────────────────────
+// Updates a preview file that Claude Code hooks can read to inject messages
+
+const INCOMING_DIR = path.join(require('os').homedir(), '.tinyclaw', 'incoming');
+
+function updateIncomingPreview(): void {
+    try {
+        // Ensure directory exists
+        if (!fs.existsSync(INCOMING_DIR)) {
+            fs.mkdirSync(INCOMING_DIR, { recursive: true });
+        }
+
+        const count = getPendingMessageCount();
+        const messages = getPendingMessagesPreview(5);
+
+        const preview = {
+            count,
+            messages,
+            updated_at: Date.now(),
+        };
+
+        // Write to a general preview file (all agents)
+        fs.writeFileSync(
+            path.join(INCOMING_DIR, 'all.json'),
+            JSON.stringify(preview, null, 2)
+        );
+
+        // Also write per-agent preview files
+        const agentMessages = new Map<string, typeof messages>();
+        for (const msg of messages) {
+            const agent = msg.agent || 'default';
+            if (!agentMessages.has(agent)) {
+                agentMessages.set(agent, []);
+            }
+            agentMessages.get(agent)!.push(msg);
+        }
+
+        for (const [agentId, msgs] of agentMessages) {
+            fs.writeFileSync(
+                path.join(INCOMING_DIR, `${agentId}.json`),
+                JSON.stringify({ count: msgs.length, messages: msgs, updated_at: Date.now() }, null, 2)
+            );
+        }
+
+        // Clear preview files for agents with no messages
+        const settings = getSettings();
+        const agents = getAgents(settings);
+        for (const agentId of Object.keys(agents)) {
+            if (!agentMessages.has(agentId)) {
+                const agentFile = path.join(INCOMING_DIR, `${agentId}.json`);
+                if (fs.existsSync(agentFile)) {
+                    fs.writeFileSync(agentFile, JSON.stringify({ count: 0, messages: [], updated_at: Date.now() }, null, 2));
+                }
+            }
+        }
+    } catch (error) {
+        log('ERROR', `Failed to update incoming preview: ${(error as Error).message}`);
+    }
+}
+
 // Log agent and team configuration on startup
 function logAgentConfig(): void {
     const settings = getSettings();
@@ -362,7 +423,16 @@ logAgentConfig();
 emitEvent('processor_start', { agents: Object.keys(getAgents(getSettings())), teams: Object.keys(getTeams(getSettings())) });
 
 // Event-driven: all messages come through the API server (same process)
-queueEvents.on('message:enqueued', () => processQueue());
+queueEvents.on('message:enqueued', () => {
+    updateIncomingPreview(); // Update preview file for Claude hooks
+    processQueue();
+});
+
+// Also update preview after processing completes
+queueEvents.on('message:completed', () => updateIncomingPreview());
+
+// Periodic preview update (every 10 seconds) for visibility during long tasks
+setInterval(() => updateIncomingPreview(), 10 * 1000);
 
 // Periodic maintenance
 setInterval(() => {

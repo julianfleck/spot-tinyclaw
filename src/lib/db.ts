@@ -195,6 +195,7 @@ export function completeMessage(rowId: number): void {
     getDb().prepare(`
         UPDATE messages SET status = 'completed', updated_at = ? WHERE id = ?
     `).run(Date.now(), rowId);
+    queueEvents.emit('message:completed', { id: rowId });
 }
 
 export function failMessage(rowId: number, error: string): void {
@@ -339,6 +340,45 @@ export function getPendingAgents(): string[] {
         SELECT DISTINCT COALESCE(agent, 'default') as agent FROM messages WHERE status = 'pending'
     `).all() as { agent: string }[];
     return rows.map(r => r.agent);
+}
+
+/**
+ * Get pending messages for preview (for hook injection).
+ * Returns messages that are waiting to be processed by any agent.
+ */
+export function getPendingMessagesPreview(limit: number = 5): Array<{
+    channel: string;
+    sender: string;
+    preview: string;
+    agent: string;
+    created_at: number;
+}> {
+    const rows = getDb().prepare(`
+        SELECT channel, sender, message, COALESCE(agent, 'default') as agent, created_at
+        FROM messages
+        WHERE status = 'pending' AND conversation_id IS NULL
+        ORDER BY created_at ASC
+        LIMIT ?
+    `).all(limit) as Array<{ channel: string; sender: string; message: string; agent: string; created_at: number }>;
+
+    return rows.map(r => ({
+        channel: r.channel,
+        sender: r.sender,
+        preview: r.message.substring(0, 100) + (r.message.length > 100 ? '...' : ''),
+        agent: r.agent,
+        created_at: r.created_at,
+    }));
+}
+
+/**
+ * Count pending messages (excludes internal/conversation messages).
+ */
+export function getPendingMessageCount(): number {
+    const row = getDb().prepare(`
+        SELECT COUNT(*) as count FROM messages
+        WHERE status = 'pending' AND conversation_id IS NULL
+    `).get() as { count: number };
+    return row.count;
 }
 
 // ── Lifecycle ────────────────────────────────────────────────────────────────
