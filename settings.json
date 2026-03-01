@@ -76,6 +76,6 @@
     }
   },
   "monitoring": {
-    "heartbeat_interval": 300
+    "heartbeat_interval": 1800
   }
 }
